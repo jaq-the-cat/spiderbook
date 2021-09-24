@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, TextAreaField
 from wtforms.fields.core import SelectField
 from wtforms.fields.html5 import EmailField
+from wtforms.fields.simple import HiddenField
 from wtforms.validators import DataRequired, Email, Length
 
 class LoginForm(FlaskForm):
@@ -20,3 +21,7 @@ class PostForm(FlaskForm):
     body = TextAreaField('Body', validators=[Length(1024)])
     board = SelectField('Board', validators=[DataRequired()],
             choices=['board-a', 'board-b'])
+
+class CommentForm(FlaskForm):
+    post_uid = HiddenField('post_uid', validators=[DataRequired()])
+    body = TextAreaField('Body', validators=[Length(512)])

@@ -27,6 +27,14 @@ def post():
 
 @bp.post('/comment')
 def comment():
-    return ''
+    cf = PostForm()
+    if cf.validate_on_submit():
+        db.session.add(Comment(
+            current_user.get_id(),
+            cf.post_uid.data,
+            cf.body.data
+        ))
+        return redirect(url_for('index.index'))
+    return redirect(url_for('index.index'))
 
 app.register_blueprint(bp)
