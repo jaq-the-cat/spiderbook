@@ -1,7 +1,8 @@
-from application.forms import PostForm
-from flask import render_template, Blueprint, redirect
-from flask_login import login_required, current_user
+from flask import Blueprint, redirect, render_template
+from flask_login import current_user, login_required
+
 from application import app, db
+from application.forms import PostForm
 from application.models import Post
 
 bp = Blueprint('user', __name__, url_prefix='/user')

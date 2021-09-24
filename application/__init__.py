@@ -1,9 +1,10 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
-from typing import Callable
-import dotenv
 import os
+from typing import Callable
+
+import dotenv
+from flask import Flask
+from flask_login import LoginManager
+from flask_sqlalchemy import SQLAlchemy
 
 dotenv.load_dotenv()
 
@@ -25,10 +26,12 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 from application.models import User
+
+
 @login_manager.user_loader
 def load_user(uid: str):
     return User.query.get(uid)
 
+import application.controllers.auth
 # Register views
 import application.controllers.index
-import application.controllers.auth

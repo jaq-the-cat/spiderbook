@@ -5,6 +5,7 @@ from flask_login import login_user, logout_user
 from application import db
 from application.util import hashpw
 
+
 class User(db.Model):
     __tablename__ = 'users'
     uid = db.Column(db.String(36), primary_key=True)

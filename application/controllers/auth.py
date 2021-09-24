@@ -1,8 +1,9 @@
-from flask import render_template, request, redirect, url_for, Blueprint
+from flask import Blueprint, redirect, render_template, request, url_for
+
 from application import app, db
+from application.forms import LoginForm, SignupForm
 from application.models import User
 from application.util import hashpw
-from application.forms import LoginForm, SignupForm
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 

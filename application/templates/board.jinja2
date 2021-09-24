@@ -1,0 +1,16 @@
+{% extends 'index.jinja2' %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='board.css') }}">
+{% endblock css %}
+
+{% block body %}
+{% for post in posts %}
+<article>
+    <h2>{{ post.uid }}</h2>
+    <p>{{ post['poster_uid'] }}</p>
+    <p>{{ post['title'] }}</p>
+    <p>{{ post['body'] }}</p>
+</article>
+{% endfor %}
+{% endblock body %}
