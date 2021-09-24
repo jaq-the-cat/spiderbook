@@ -1,4 +1,3 @@
-# type: ignore
 from uuid import uuid4
 
 from flask_login import login_user, logout_user

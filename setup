@@ -1,9 +1,0 @@
-#!/bin/sh
-secret=$(python -c "import uuid; print(uuid.uuid4())")
-echo "FLASK_APP=application" > .env
-echo "FLASK_ENV=development" >> .env
-echo "FLASK_DEBUG=1" >> .env
-echo "" >> .env
-echo "SECRET_KEY=$secret" >> .env
-echo "DATABASE_URL=" >> .env
-$EDITOR .env

@@ -1,4 +1,3 @@
-# type: ignore
 from application.forms import PostForm
 from flask import render_template, Blueprint, redirect
 from flask_login import login_required, current_user
