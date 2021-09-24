@@ -5,12 +5,12 @@
 {% endblock css %}
 
 {% block body %}
-{% for post in posts %}
-<article>
-    <h2>{{ post.uid }}</h2>
-    <p>{{ post['poster_uid'] }}</p>
-    <p>{{ post['title'] }}</p>
-    <p>{{ post['body'] }}</p>
-</article>
-{% endfor %}
+  {% for post in posts %}
+    <article>
+        <h2>{{ post.uid }}</h2>
+        <p>{{ post['poster_uid'] }}</p>
+        <p>{{ post['title'] }}</p>
+        <p>{{ post['body'] }}</p>
+    </article>
+  {% endfor %}
 {% endblock body %}

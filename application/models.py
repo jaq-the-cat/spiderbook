@@ -65,7 +65,7 @@ class Post(db.Model):
         self.body = body
 
 class Comment(db.Model):
-    __tablename__ = 'posts'
+    __tablename__ = 'comments'
     uid = db.Column(db.String(36), primary_key=True)
     user_uid = db.Column(db.String(36), db.ForeignKey('users.uid'))
     post_uid = db.Column(db.String(36), db.ForeignKey('posts.uid'))

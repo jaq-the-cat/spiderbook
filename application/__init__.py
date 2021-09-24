@@ -26,8 +26,6 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 from application.models import User
-
-
 @login_manager.user_loader
 def load_user(uid: str):
     return User.query.get(uid)
