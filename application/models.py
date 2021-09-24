@@ -32,7 +32,7 @@ class User(db.Model):
         return True
 
     def is_active(self) -> bool:
-        return not self.suspended
+        return not User.query.filter_by(uid=uid).first().suspended
 
     def is_anonymous(self) -> bool:
         return False
