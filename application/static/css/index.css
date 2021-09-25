@@ -84,11 +84,30 @@ input, textarea, select {
 }
 
 button {
-  padding: 10px;
-  border: 1px solid var(--gray);
   background-color: var(--black);
+  border: 0;
+}
+
+button::before {
+  content: '[ ';
+}
+
+button::after {
+  content: ' ]';
 }
 
 button:hover {
   cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+h2 {
+  font-size: 1.6em;
+}
+
+p {
+  font-size: 1.2em;
 }

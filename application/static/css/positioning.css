@@ -1,14 +1,6 @@
-form.post {
-  position: fixed;
-  top: 0;
-  right: 0;
+form {
   border: 1px solid var(--gray);
-  border-top: none;
-  border-right: none;
   padding: 10px;
-}
-
-form.post {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,5 +8,16 @@ form.post {
 
 form.post textarea {
   width: 35ch;
+}
+
+form textarea {
   resize: vertical;
+}
+
+form.post {
+  position: fixed;
+  top: 0;
+  right: 0;
+  border-top: none;
+  border-right: none;
 }

@@ -1,8 +1,15 @@
+article.post {
+  display: inline-block;
+}
+
 article {
   border-left: 1px solid var(--gray);
-  display: inline-block;
   padding-left: 15px;
   max-width: 40%;
+}
+
+article.form  {
+  display: inline-block;
 }
 
 article h2 {
@@ -14,8 +21,16 @@ article p {
 }
 
 article ul {
-  width: 15vw;
   margin-top: 5px;
   padding-top: 15px;
   border-top: 1px solid var(--gray);
+}
+
+article form.reply, article article.reply {
+  margin-top: 15px;
+  padding: 5px;
+}
+
+article article.reply h5 {
+  white-space: nowrap;
 }

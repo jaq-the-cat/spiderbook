@@ -14,7 +14,7 @@
   </form>
 
   {% for post in posts %}
-    <article>
+    <article class="post">
       <h5><a href="{{ url_for('index.post', post=post.uid) }}">
       /p/{{ post.uid }}</a></h5>
         <h2>{{ post['title'] }}</h2>
@@ -23,8 +23,12 @@
           <p>Post made by me :)</p>
         {% endif %}
         <ul>
-          <button>Reply</button>
+          {{ w.reply(cf, post.uid, post.comments) }}
         </ul>
     </article>
   {% endfor %}
 {% endblock body %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/reply.js') }}"></script>
+{% endblock js %}

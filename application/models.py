@@ -57,6 +57,7 @@ class Post(db.Model):
     uid = db.Column(db.String(36), primary_key=True)
     user_uid = db.Column(db.String(36), db.ForeignKey('users.uid'))
     board_uid = db.Column(db.String(36), db.ForeignKey('boards.uid'))
+    comments = db.relationship('Comment', backref='post')
     title = db.Column(db.String(128))
     body = db.Column(db.String(1024))
 

@@ -1,8 +1,8 @@
-from flask import Blueprint, redirect, render_template, url_for
+from flask import Blueprint, redirect, render_template, url_for, jsonify
 from flask_login import current_user, login_required
 
 from application import app, db
-from application.forms import PostForm
+from application.forms import PostForm, CommentForm
 from application.models import Post, Comment
 
 bp = Blueprint('user', __name__, url_prefix='/user')
@@ -28,7 +28,11 @@ def post():
 
 @bp.post('/comment')
 def comment():
-    cf = PostForm()
+    cf = CommentForm()
+    print(cf.post_uid)
+    print(cf.body)
+    print(cf.validate())
+    print(cf.validate_on_submit())
     if cf.validate_on_submit():
         db.session.add(Comment(
             current_user.get_id(),
@@ -36,7 +40,7 @@ def comment():
             cf.body.data
         ))
         db.session.commit()
-        return redirect(url_for('index.index'))
-    return redirect(url_for('index.index'))
+        return jsonify({'succ': True})
+    return jsonify({'succ': False})
 
 app.register_blueprint(bp)

@@ -1,3 +1,20 @@
 {% macro input(name) %}
 <input type="text" name="{{ name }}" id="{{ name }}">
 {% endmacro %}
+
+{% macro reply(cf, post_uid, replies) %}
+<button class="reply">toggle reply form</button>
+<button class="reply">toggle replies</button>
+<form class="reply hidden" onsubmit="return onReply(this)">
+  {{ cf.csrf_token }}
+  {{ cf.post_uid(value=post_uid) }}
+  {{ cf.body.label }}
+  {{ cf.body }}
+  <button>reply</button>
+</form>
+{% for reply in replies %}
+<article class="reply">
+  <p>{{ reply['body'] }}</p>
+</article>
+{% endfor %}
+{% endmacro %}
