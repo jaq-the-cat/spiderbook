@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, url_for, redirect, jsonify
 
 from application import app
 from application.models import Post, Board
@@ -24,11 +24,13 @@ def board_posts(board: str):
 
 @bp.get('/p/<post>')
 def post(post: str):
-    print(Board.query.all())
-    post = Post.query.filter_by(uid=post).first()
-    return render_template('post.jinja2',
-            title=post.title,
-            cf=CommentForm(),
-            post=post)
+    return redirect(url_for('index.index'))
+
+@bp.get('/p/<post>/comments')
+def post_replies(post: str):
+    comments = Post.query.filter_by(uid=post).comments
+    return jsonify({
+        "comments": comments,
+    })
 
 app.register_blueprint(bp)

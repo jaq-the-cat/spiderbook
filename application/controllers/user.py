@@ -23,10 +23,11 @@ def post():
             pf.body.data
         ))
         db.session.commit()
-        return redirect(url_for('index.index'))
-    return redirect(url_for('index.index'))
+        return jsonify({'succ': True})
+    return jsonify({'succ': False})
 
 @bp.post('/comment')
+@login_required
 def comment():
     cf = CommentForm()
     print(cf.post_uid)

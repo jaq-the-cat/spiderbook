@@ -5,6 +5,8 @@ from wtforms.fields.html5 import EmailField
 from wtforms.fields.simple import HiddenField
 from wtforms.validators import DataRequired, Email, Length
 
+with open('boards.txt') as b:
+    boards = [(b[:-1], b[:-1]) for b in b.readlines()]
 
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email(), Length(5, 256)])
@@ -19,8 +21,7 @@ class SignupForm(FlaskForm):
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired(), Length(1, 128)])
     body = TextAreaField('Body', validators=[Length(1, 1024)])
-    board = SelectField('Board', validators=[DataRequired()], choices=[
-        ('board-a', 'board-a'),('board-b', 'board-b'), ('board-c', 'board-c')])
+    board = SelectField('Board', validators=[DataRequired()], choices=boards)
 
 class CommentForm(FlaskForm):
     post_uid = HiddenField('post_uid', validators=[DataRequired()])

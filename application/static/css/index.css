@@ -4,9 +4,8 @@
   font-size: 14pt;
   --black: #1d1d1d;
   --white: #fafafa;
-  --yellow: #d9d95a;
   --green: #66d96d;
-  --idk: #2fd18f;
+  --idk: #4effac;
   --gray: #3f3f3f;
 }
 
@@ -60,7 +59,7 @@ header ul {
 }
 
 .logo .spider {
-  color: var(--yellow);
+  color: var(--green);
 }
 
 .logo .book {

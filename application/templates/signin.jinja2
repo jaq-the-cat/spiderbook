@@ -1,5 +1,9 @@
 {% extends 'index.jinja2' %}
 
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/signinout.css') }}">
+{% endblock css %}
+
 {% block body %}
 <form method="post" action="{{ url_for('auth.signin') }}">
   {{ lf.csrf_token }}
@@ -10,8 +14,10 @@
   {{ lf.password.label }}
   {{ lf.password }}<br>
 
-  {{ lf.remember_me }}
-  {{ lf.remember_me.label }}<br>
+  <span>
+    {{ lf.remember_me }}
+    {{ lf.remember_me.label }}<br>
+  </span>
 
   <button type="submit">Sign in</button>
 </form>

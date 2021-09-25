@@ -1,0 +1,5 @@
+form {
+  display: inline-flex;
+  min-width: 400px;
+  width: unset;
+}

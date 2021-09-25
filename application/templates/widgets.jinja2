@@ -3,18 +3,20 @@
 {% endmacro %}
 
 {% macro reply(cf, post_uid, replies) %}
-<button class="reply">toggle reply form</button>
-<button class="reply">toggle replies</button>
-<form class="reply hidden" onsubmit="return onReply(this)">
+<button class="add-comment">toggle reply form</button>
+<button class="toggle-comments">toggle replies</button>
+<form class="add-comment hidden" method="post">
   {{ cf.csrf_token }}
   {{ cf.post_uid(value=post_uid) }}
   {{ cf.body.label }}
   {{ cf.body }}
   <button>reply</button>
 </form>
-{% for reply in replies %}
-<article class="reply">
-  <p>{{ reply['body'] }}</p>
-</article>
-{% endfor %}
+<div class="comments hidden">
+  {% for reply in replies %}
+    <article class="comment">
+      <p>{{ reply['body'] }}</p>
+    </article>
+  {% endfor %}
+</div>
 {% endmacro %}
