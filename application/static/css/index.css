@@ -1,9 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Titillium+Web:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;700&display=swap');
 
 :root {
   font-size: 14pt;
   --black: #1d1d1d;
   --white: #fdfdfd;
+  --yellow: #d9d95a;
+  --green: #66d96d;
+  --gray: #3f3f3f;
 }
 
 * {
@@ -11,12 +14,59 @@
   padding: 0;
   box-sizing: border-box;
   font-family:
-    'Open Sans', Arial, Helvetica, sans-serif;
+    'Source Code Pro', Arial, Helvetica, sans-serif;
   color: var(--white);
   background-color: var(--black);
+  text-decoration: none;
+  line-height: 1em;
+  list-style-type: none;
+}
+
+body {
+  padding: 15px;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family:
-    'Titillium Web', Arial, Helvetica, sans-serif;
+  font-weight: 300;
+}
+
+/* Logo */
+header {
+  margin-bottom: 15px;
+}
+
+header h1 {
+  margin-bottom: 2px;
+}
+
+header ul {
+  display: flex;
+  flex-direction: row;
+  column-gap: 15px;
+}
+
+.logo .spider {
+  color: var(--yellow);
+}
+
+.logo .book {
+  color: var(--green);
+}
+
+label, input, textarea, select {
+  margin-bottom: 10px;
+}
+
+input, textarea, select {
+  padding: 5px;
+  border: 1px solid var(--gray);
+}
+
+button {
+  padding: 10px;
+  border: 1px solid var(--gray);
+}
+
+button:hover {
+  cursor: pointer;
 }

@@ -7,12 +7,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document | {{ title }} </title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/positioning.css') }}">
   {% block css %}{% endblock css %}
 </head>
 <body>
-  {% if current_user.is_authenticated %}
-    Logged in as {{ current_user }}
-  {% endif %}
+  <header>
+    <h1 class="logo">
+      <a href="{{ url_for('index.index') }}">
+        <span class="spider">Spider</span><span class="logo book">book</span>
+      </a>
+    </h1>
+    <ul>
+      {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('auth.signout') }}">Sign Out</a></li>
+      {% else %}
+        <li><a href="{{ url_for('auth.signin') }}">Sign In</a></li>
+        <li><a href="{{ url_for('auth.signup') }}">Sign Up</a></li>
+      {% endif %}
+    </ul>
+  </header>
   {% block body %}{% endblock body %}
 </body>
 {% block js %}{% endblock js %}

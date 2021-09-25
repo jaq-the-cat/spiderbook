@@ -45,6 +45,9 @@ class Board(db.Model):
     uid = db.Column(db.String(36), primary_key=True)
     name = db.Column(db.String(128), unique=True)
 
+    def __repr__(self):
+        return f'Board<{self.name}>'
+
     def __init__(self, name: str):
         self.uid = str(uuid4())
         self.name = name
@@ -56,6 +59,9 @@ class Post(db.Model):
     board_uid = db.Column(db.String(36), db.ForeignKey('boards.uid'))
     title = db.Column(db.String(128))
     body = db.Column(db.String(1024))
+
+    def __repr__(self):
+        return f'Post<{self.title[:30]} : {self.body[:30]} by {self.user_uid}>'
 
     def __init__(self, user_uid: str, board_name: str, title: str, body: str):
         self.uid = str(uuid4())
@@ -70,6 +76,9 @@ class Comment(db.Model):
     user_uid = db.Column(db.String(36), db.ForeignKey('users.uid'))
     post_uid = db.Column(db.String(36), db.ForeignKey('posts.uid'))
     body = db.Column(db.String(512))
+
+    def __repr__(self):
+        return f'Comment<{self.body[:30]} by {self.user_uid}>'
 
     def __init__(self, user_uid: str, post_uid: str, body: str):
         self.uid = str(uuid4())

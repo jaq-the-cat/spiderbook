@@ -5,12 +5,23 @@
 {% endblock css %}
 
 {% block body %}
+  <form class="post" action="/user/post" method="post">
+    {{ pf.csrf_token }}
+    {{ pf.title.label }} {{ pf.title }}
+    {{ pf.body.label }} {{ pf.body }}
+    {{ pf.board.label }} {{ pf.board }}
+    <button type="submit">Create Post</button>
+  </form>
+
   {% for post in posts %}
     <article>
-        <h2>{{ post.uid }}</h2>
+        <h4>{{ post.uid }}</h4>
         <p>{{ post['poster_uid'] }}</p>
         <p>{{ post['title'] }}</p>
         <p>{{ post['body'] }}</p>
+        {% if current_user.uid == post['poster_uid'] %}
+          <p>Post made by me :)</p>
+        {% endif %}
     </article>
   {% endfor %}
 {% endblock body %}

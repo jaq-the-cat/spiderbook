@@ -1,4 +1,5 @@
 from flask import Blueprint, redirect, render_template, request, url_for
+from flask_login import logout_user
 
 from application import app, db
 from application.forms import LoginForm, SignupForm
@@ -13,6 +14,7 @@ def signin():
     if request.method.lower() == 'get':
         return render_template('signin.jinja2', title='Sign In', lf=login_form)
     if login_form.validate_on_submit():
+        print("Signing in")
         res = User.query.filter_by(
             email=login_form.email.data,
             password=hashpw(login_form.password.data)
@@ -20,7 +22,12 @@ def signin():
         if len(res) != 0:
             res[0].signin(login_form.remember_me)
         return redirect(url_for('index.index'))
-    return redirect(url_for('auth.auth'))
+    return redirect(url_for('auth.signin'))
+
+@bp.get('/signout')
+def signout():
+    logout_user()
+    return redirect(url_for('index.index'))
 
 @bp.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -28,14 +35,14 @@ def signup():
     if request.method.lower() == 'get':
         return render_template('signup.jinja2', title='Sign Up', sf=signup_form)
     if signup_form.validate_on_submit():
-        print(vars(signup_form.email))
+        print("Adding user")
         db.session.add(User(
             signup_form.name.data,
             signup_form.email.data,
             signup_form.password.data
         ))
         db.session.commit()
-        return redirect(url_for('index.index'))
-    return redirect(url_for('auth.auth'))
+        return redirect(url_for('auth.signin'))
+    return redirect(url_for('auth.signup'))
 
 app.register_blueprint(bp)

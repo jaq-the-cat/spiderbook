@@ -1,9 +1,9 @@
-from flask import Blueprint, redirect, render_template
+from flask import Blueprint, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
 from application import app, db
 from application.forms import PostForm
-from application.models import Post
+from application.models import Post, Comment
 
 bp = Blueprint('user', __name__, url_prefix='/user')
 
@@ -22,6 +22,7 @@ def post():
             pf.title.data,
             pf.body.data
         ))
+        db.session.commit()
         return redirect(url_for('index.index'))
     return redirect(url_for('index.index'))
 
@@ -34,6 +35,7 @@ def comment():
             cf.post_uid.data,
             cf.body.data
         ))
+        db.session.commit()
         return redirect(url_for('index.index'))
     return redirect(url_for('index.index'))
 

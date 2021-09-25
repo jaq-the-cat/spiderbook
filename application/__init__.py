@@ -30,6 +30,7 @@ from application.models import User
 def load_user(uid: str):
     return User.query.get(uid)
 
-import application.controllers.auth
 # Register views
+import application.controllers.auth
 import application.controllers.index
+import application.controllers.user
