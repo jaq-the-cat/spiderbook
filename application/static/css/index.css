@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;700&display=swap');
 
 :root {
   font-size: 14pt;
   --black: #1d1d1d;
-  --white: #fdfdfd;
+  --white: #fafafa;
   --yellow: #d9d95a;
   --green: #66d96d;
+  --idk: #2fd18f;
   --gray: #3f3f3f;
 }
 
@@ -16,7 +17,6 @@
   font-family:
     'Source Code Pro', Arial, Helvetica, sans-serif;
   color: var(--white);
-  background-color: var(--black);
   text-decoration: none;
   line-height: 1em;
   list-style-type: none;
@@ -24,10 +24,24 @@
 
 body {
   padding: 15px;
+  background-color: var(--black);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1 {
   font-weight: 300;
+  font-size: 2.2rem;
+}
+
+h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
+a {
+  color: var(--idk);
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 /* Logo */
@@ -53,6 +67,12 @@ header ul {
   color: var(--green);
 }
 
+.logo a {
+  color: var(--green);
+}
+
+/* Form stuff */
+
 label, input, textarea, select {
   margin-bottom: 10px;
 }
@@ -60,11 +80,13 @@ label, input, textarea, select {
 input, textarea, select {
   padding: 5px;
   border: 1px solid var(--gray);
+  background-color: var(--black);
 }
 
 button {
   padding: 10px;
   border: 1px solid var(--gray);
+  background-color: var(--black);
 }
 
 button:hover {

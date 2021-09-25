@@ -1,7 +1,7 @@
 {% extends 'index.jinja2' %}
 
 {% block css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='board.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/board.css') }}">
 {% endblock css %}
 
 {% block body %}
@@ -15,13 +15,16 @@
 
   {% for post in posts %}
     <article>
-        <h4>{{ post.uid }}</h4>
-        <p>{{ post['poster_uid'] }}</p>
-        <p>{{ post['title'] }}</p>
+      <h5><a href="{{ url_for('index.post', post=post.uid) }}">
+      /p/{{ post.uid }}</a></h5>
+        <h2>{{ post['title'] }}</h2>
         <p>{{ post['body'] }}</p>
         {% if current_user.uid == post['poster_uid'] %}
           <p>Post made by me :)</p>
         {% endif %}
+        <ul>
+          <button>Reply</button>
+        </ul>
     </article>
   {% endfor %}
 {% endblock body %}

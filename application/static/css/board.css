@@ -1,0 +1,21 @@
+article {
+  border-left: 1px solid var(--gray);
+  display: inline-block;
+  padding-left: 15px;
+  max-width: 40%;
+}
+
+article h2 {
+  margin: 2px 0 10px;
+}
+
+article p {
+  margin-bottom: 15px;
+}
+
+article ul {
+  width: 15vw;
+  margin-top: 5px;
+  padding-top: 15px;
+  border-top: 1px solid var(--gray);
+}
