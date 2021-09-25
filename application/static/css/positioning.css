@@ -6,6 +6,10 @@ form {
   justify-content: center;
 }
 
+form.post {
+  max-height: 100vh;
+}
+
 form.post textarea {
   width: 35ch;
 }

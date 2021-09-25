@@ -13,10 +13,5 @@
   <button>reply</button>
 </form>
 <div class="comments hidden">
-  {% for reply in replies %}
-    <article class="comment">
-      <p>{{ reply['body'] }}</p>
-    </article>
-  {% endfor %}
 </div>
 {% endmacro %}

@@ -39,6 +39,10 @@ a {
   color: var(--idk);
 }
 
+a * {
+  color: inherit;
+}
+
 a:hover {
   text-decoration: underline;
 }

@@ -28,9 +28,9 @@ def post(post: str):
 
 @bp.get('/p/<post>/comments')
 def post_replies(post: str):
-    comments = Post.query.filter_by(uid=post).comments
+    post = Post.query.filter_by(uid=post).first()
     return jsonify({
-        "comments": comments,
+        "comments": [comment.body for comment in post.comments]
     })
 
 app.register_blueprint(bp)
