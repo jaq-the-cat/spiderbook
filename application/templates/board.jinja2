@@ -15,12 +15,12 @@
 
   <div class="posts">
     {% for post in posts %}
-      <article class="post">
+      <article id="{{ post.uid }}" class="post">
         <h5><a href="{{ url_for('index.post', post=post.uid) }}">
-            /p/<span>{{ post.uid }}</span></a></h5>
+            /p/{{ post.uid }}</a></h5>
         <h2>{{ post['title'] }}</h2>
         <p>{{ post['body'] }}</p>
-        <ul>
+        <ul class="comment-section">
           {{ w.reply(cf, post.uid, post.comments) }}
         </ul>
       </article>
