@@ -52,18 +52,21 @@ def comment():
     cf = CommentForm()
     if cf.validate_on_submit():
         image: FileStorage = cf.image.data
-        path = os.path.join(
-            os.getenv('UPLOAD_PATH', 'storage/'),
-            f"{uuid4()}{image.filename.split('.')[-1]}")
-        mt = image.mimetype
-        image.save(path),
+        if image is not None:
+            path = os.path.join(
+                os.getenv('UPLOAD_PATH', 'storage/'),
+                f"{uuid4()}{image.filename.split('.')[-1]}")
+            mt = image.mimetype
+            image.save(path),
         db.session.add(Comment(
             current_user.get_id(),
             cf.post_uid.data,
             cf.body.data,
-            secure_filename(image.filename.split('/')[-1]),
-            path,
-            mt,
+            *([] if image is None else [
+                secure_filename(image.filename.split('/')[-1]),
+                path,
+                mt,
+            ])
         ))
         db.session.commit()
         return jsonify({'succ': True})

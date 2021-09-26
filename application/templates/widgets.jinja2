@@ -4,7 +4,7 @@
 
 {% macro reply(cf, post_uid, replies) %}
 <button class="add-comment">toggle reply form</button>
-<button class="toggle-comments">toggle replies</button>
+<button class="toggle-comments">open replies</button>
 <form class="add-comment hidden" enctype="multipart/form-data" target="#">
   {{ cf.csrf_token }}
   {{ cf.post_uid(value=post_uid) }}

@@ -56,7 +56,7 @@ class Post(db.Model):
         return f'Post<{self.title[:30]} : {self.body[:30]} by {self.user_uid}>'
 
     def __init__(self, user_uid: str, board: str, title: str, body: str,
-            image_filename: str, image_path: str, image_mimetype: str):
+            image_filename: str=None, image_path: str=None, image_mimetype: str=None):
         self.uid = str(uuid4())
         self.user_uid = user_uid
         self.board = board
@@ -80,7 +80,7 @@ class Comment(db.Model):
         return f'Comment<{self.body[:30]} by {self.user_uid}>'
 
     def __init__(self, user_uid: str, post_uid: str, body: str,
-            image_filename: str, image_path: str, image_mimetype: str):
+            image_filename: str=None, image_path: str=None, image_mimetype: str=None):
         self.uid = str(uuid4())
         self.user_uid = user_uid
         self.post_uid = post_uid

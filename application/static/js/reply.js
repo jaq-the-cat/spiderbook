@@ -7,6 +7,8 @@ document.querySelectorAll('button.add-comment').forEach((el) => {
 
 document.querySelectorAll('button.toggle-comments').forEach((el) => {
   el.addEventListener('click', (_e) => {
+    el.innerHTML = el.innerHTML ===
+      "open replies" ? "close replies" : "open replies";
     el.nextElementSibling.nextElementSibling.classList.toggle('hidden');
   });
 });
