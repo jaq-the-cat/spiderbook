@@ -23,8 +23,13 @@
     <article id="{{ post.uid }}" class="post">
         <h5><a href="{{ url_for('index.post', post=post.uid) }}">
             /p/{{ post.uid }}</a></h5>
-        <h2>{{ post['title'] }}</h2>
-        <p>{{ post['body'] }}</p>
+        <div>
+          <h2>{{ post['title'] }}</h2>
+          <p>
+            <img align="top" src="{{ url_for('index.post_image', post=post.uid) }}">
+            <span>{{ post['body'] }}</span>
+          </p>
+        </div>
         <ul class="comment-section">
           {{ w.reply(cf, post.uid, post.comments) }}
         </ul>

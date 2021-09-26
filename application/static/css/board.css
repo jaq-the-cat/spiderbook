@@ -10,6 +10,26 @@ article.post {
   display: inline-block;
 }
 
+article.post img {
+    max-height: 300px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    float: left;
+}
+
+article.post img span {
+    float: none;
+}
+
+article.post > ul {
+    clear: both;
+}
+
+article.post > div > p {
+    white-space: wrap;
+    word-wrap: break-word;
+}
+
 article {
   border-left: 1px solid var(--gray);
   padding-left: 15px;
