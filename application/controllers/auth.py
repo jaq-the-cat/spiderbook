@@ -14,7 +14,7 @@ def signin():
     if request.method.lower() == 'get':
         return render_template('signin.jinja2', title='Sign In', lf=login_form)
     if login_form.validate_on_submit():
-        print("Signing in")
+        print(f"Signing in as {login_form.email.data}")
         res = User.query.filter_by(
             email=login_form.email.data,
             password=hashpw(login_form.password.data)
@@ -35,7 +35,7 @@ def signup():
     if request.method.lower() == 'get':
         return render_template('signup.jinja2', title='Sign Up', sf=signup_form)
     if signup_form.validate_on_submit():
-        print("Adding user")
+        print(f"Adding user {signup_form.email.data} [{signup_form.name.data}]")
         db.session.add(User(
             signup_form.name.data,
             signup_form.email.data,
