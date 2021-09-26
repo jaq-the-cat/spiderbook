@@ -4,6 +4,7 @@ from flask_login import login_user, logout_user
 
 from application import db
 from application.util import hashpw
+from datetime import datetime
 
 
 class User(db.Model):
@@ -51,6 +52,7 @@ class Post(db.Model):
     image_filename = db.Column(db.String(512), nullable=True)
     image_path = db.Column(db.String(512), nullable=True)
     image_mimetype = db.Column(db.String(64), nullable=True)
+    dt = db.Column(db.DateTime(), nullable=False, default=lambda: datetime.utcnow())
 
     def __repr__(self):
         return f'Post<{self.title[:30]} : {self.body[:30]} by {self.user_uid}>'
@@ -75,6 +77,7 @@ class Comment(db.Model):
     image_filename = db.Column(db.String(512), nullable=True)
     image_path = db.Column(db.String(512), nullable=True)
     image_mimetype = db.Column(db.String(64), nullable=True)
+    dt = db.Column(db.DateTime(), nullable=False, default=lambda: datetime.utcnow())
 
     def __repr__(self):
         return f'Comment<{self.body[:30]} by {self.user_uid}>'

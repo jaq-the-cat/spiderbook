@@ -30,7 +30,7 @@ async function updatePost(post_uid, div) {
   let reps = await fetch(`/p/${post_uid}/comments`).then((r) => r.json());
   reps = reps.comments;
   div.innerHTML = '';
-  reps.reverse().forEach((rep) => {
+  reps.forEach((rep) => {
     div.appendChild(reply(rep));
   });
 }

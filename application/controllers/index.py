@@ -12,7 +12,7 @@ def index():
             title="All",
             pf=PostForm(),
             cf=CommentForm(),
-            posts=Post.query.all())
+            posts=Post.query.order_by(Post.dt.desc()).all())
 
 @bp.get('/b/<board>')
 def board_posts(board: str):
@@ -21,14 +21,14 @@ def board_posts(board: str):
             board=board,
             pf=PostForm(),
             cf=CommentForm(),
-            posts=Post.query.filter_by(board=board))
+            posts=Post.query.filter_by(board=board).order_by(Post.dt.desc()))
 
 @bp.get('/p/<post>')
 def post(post: str):
     return render_template('board.jinja2',
             title=post,
             cf=CommentForm(),
-            posts=Post.query.filter_by(uid=post).all())
+            posts=Post.query.filter_by(uid=post)).all()
 
 @bp.get('/p/<post>/image')
 def post_image(post: str):
@@ -43,7 +43,7 @@ def post_image(post: str):
 def post_replies(post: str):
     post = Post.query.filter_by(uid=post).first()
     return jsonify({
-        "comments": [comment.body for comment in post.comments]
+        "comments": [comment.body for comment in sorted(post.comments, key=lambda c: c.dt, reverse=True)]
     })
 
 app.register_blueprint(bp)

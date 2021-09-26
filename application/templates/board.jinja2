@@ -19,7 +19,7 @@
   {% endif %}
 
   <div class="posts">
-    {% for post in posts|reverse %}
+    {% for post in posts %}
     <article id="{{ post.uid }}" class="post">
         <h5><a href="{{ url_for('index.post', post=post.uid) }}">
             /p/{{ post.uid }}</a></h5>
