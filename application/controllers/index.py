@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect, jsonify
 
 from application import app
-from application.models import Post, Board
+from application.models import Post
 from application.forms import PostForm, CommentForm
 
 bp = Blueprint('index', __name__)

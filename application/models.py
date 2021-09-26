@@ -40,49 +40,51 @@ class User(db.Model):
     def get_id(self) -> str:
         return self.uid
 
-class Board(db.Model):
-    __tablename__ = 'boards'
-    uid = db.Column(db.String(36), primary_key=True)
-    name = db.Column(db.String(128), unique=True)
-
-    def __repr__(self):
-        return f'Board<{self.name}>'
-
-    def __init__(self, name: str):
-        self.uid = str(uuid4())
-        self.name = name
-
 class Post(db.Model):
     __tablename__ = 'posts'
-    uid = db.Column(db.String(36), primary_key=True)
-    user_uid = db.Column(db.String(36), db.ForeignKey('users.uid'))
-    board_uid = db.Column(db.String(36), db.ForeignKey('boards.uid'))
+    uid = db.Column(db.String(36), primary_key=True, nullable=False)
+    user_uid = db.Column(db.String(36), db.ForeignKey('users.uid'), nullable=False)
+    board = db.Column(db.String(36))
     comments = db.relationship('Comment', backref='post')
-    title = db.Column(db.String(128))
-    body = db.Column(db.String(1024))
+    title = db.Column(db.String(128), nullable=False)
+    body = db.Column(db.String(1024), nullable=False)
+    image_filename = db.Column(db.String(512), nullable=True)
+    image_path = db.Column(db.String(512), nullable=True)
+    image_mimetype = db.Column(db.String(64), nullable=True)
 
     def __repr__(self):
         return f'Post<{self.title[:30]} : {self.body[:30]} by {self.user_uid}>'
 
-    def __init__(self, user_uid: str, board_name: str, title: str, body: str):
+    def __init__(self, user_uid: str, board: str, title: str, body: str,
+            image_filename: str, image_path: str, image_mimetype: str):
         self.uid = str(uuid4())
         self.user_uid = user_uid
-        self.board_uid = Board.query.filter_by(name=board_name).first().uid
+        self.board = board
         self.title = title
         self.body = body
+        self.image_filename = image_filename
+        self.image_path = image_path
+        self.image_mimetype = image_mimetype
 
 class Comment(db.Model):
     __tablename__ = 'comments'
-    uid = db.Column(db.String(36), primary_key=True)
-    user_uid = db.Column(db.String(36), db.ForeignKey('users.uid'))
-    post_uid = db.Column(db.String(36), db.ForeignKey('posts.uid'))
-    body = db.Column(db.String(512))
+    uid = db.Column(db.String(36), primary_key=True, nullable=False)
+    user_uid = db.Column(db.String(36), db.ForeignKey('users.uid'), nullable=False)
+    post_uid = db.Column(db.String(36), db.ForeignKey('posts.uid'), nullable=False)
+    body = db.Column(db.String(512), nullable=False)
+    image_filename = db.Column(db.String(512), nullable=True)
+    image_path = db.Column(db.String(512), nullable=True)
+    image_mimetype = db.Column(db.String(64), nullable=True)
 
     def __repr__(self):
         return f'Comment<{self.body[:30]} by {self.user_uid}>'
 
-    def __init__(self, user_uid: str, post_uid: str, body: str):
+    def __init__(self, user_uid: str, post_uid: str, body: str,
+            image_filename: str, image_path: str, image_mimetype: str):
         self.uid = str(uuid4())
         self.user_uid = user_uid
         self.post_uid = post_uid
         self.body = body
+        self.image_filename = image_filename
+        self.image_path = image_path
+        self.image_mimetype = image_mimetype

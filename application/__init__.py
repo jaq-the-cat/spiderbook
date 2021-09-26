@@ -18,8 +18,7 @@ db = SQLAlchemy(app)
 
 @app.before_first_request
 def before_first_request():
-    # from application.models import Comment
-    # Comment.__table__.drop(db.engine)
+    db.drop_all()
     db.create_all()
     db.session.commit()
 

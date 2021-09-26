@@ -8,8 +8,8 @@
 <form class="add-comment hidden" target="#">
   {{ cf.csrf_token }}
   {{ cf.post_uid(value=post_uid) }}
-  {{ cf.body.label }}
-  {{ cf.body }}
+  {{ pf.image.label }} {{ pf.image }}
+  {{ cf.body.label }} {{ cf.body }}
   <button>reply</button>
 </form>
 <div class="comments hidden">

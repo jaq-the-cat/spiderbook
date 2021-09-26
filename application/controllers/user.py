@@ -1,9 +1,14 @@
-from flask import Blueprint, redirect, render_template, url_for, jsonify
+import os
+from uuid import uuid4
+
+from flask import Blueprint, jsonify, redirect, render_template, url_for
 from flask_login import current_user, login_required
+from werkzeug.datastructures import FileStorage
+from werkzeug.utils import secure_filename
 
 from application import app, db
-from application.forms import PostForm, CommentForm
-from application.models import Post, Comment
+from application.forms import CommentForm, PostForm
+from application.models import Comment, Post
 
 bp = Blueprint('user', __name__, url_prefix='/user')
 
@@ -16,11 +21,20 @@ def profile():
 def post():
     pf = PostForm()
     if pf.validate_on_submit():
+        image: FileStorage = pf.image.data
+        path = os.path.join(
+            os.getenv('UPLOAD_PATH', 'storage/'),
+            f"{uuid4()}{image.filename.split('.')[-1]}")
+        mt = image.mimetype
+        image.save(path),
         db.session.add(Post(
             current_user.get_id(),
             pf.board.data,
             pf.title.data,
-            pf.body.data
+            pf.body.data,
+            secure_filename(image.filename),
+            path,
+            mt,
         ))
         db.session.commit()
         return jsonify({'succ': True})
@@ -35,10 +49,19 @@ def comment():
     print(cf.validate())
     print(cf.validate_on_submit())
     if cf.validate_on_submit():
+        image: FileStorage = cf.image.data
+        path = os.path.join(
+            os.getenv('UPLOAD_PATH', 'storage/'),
+            f"{uuid4()}{image.filename.split('.')[-1]}")
+        mt = image.mimetype
+        image.save(path),
         db.session.add(Comment(
             current_user.get_id(),
             cf.post_uid.data,
-            cf.body.data
+            cf.body.data,
+            secure_filename(image.filename.split('/')[-1]),
+            path,
+            mt,
         ))
         db.session.commit()
         return jsonify({'succ': True})
