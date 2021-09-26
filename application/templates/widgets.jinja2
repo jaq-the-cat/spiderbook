@@ -5,11 +5,11 @@
 {% macro reply(cf, post_uid, replies) %}
 <button class="add-comment">toggle reply form</button>
 <button class="toggle-comments">toggle replies</button>
-<form class="add-comment hidden" target="#">
+<form class="add-comment hidden" enctype="multipart/form-data" target="#">
   {{ cf.csrf_token }}
   {{ cf.post_uid(value=post_uid) }}
-  {{ pf.image.label }} {{ pf.image }}
-  {{ cf.body.label }} {{ cf.body }}
+  {{ cf.image.label }} {{ cf.image }}
+  {{ cf.body.label }} {{ cf.body(autocomplete="off") }}
   <button>reply</button>
 </form>
 <div class="comments hidden">

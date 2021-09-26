@@ -61,8 +61,6 @@ document.querySelectorAll('.comment-section').forEach((el) => {
       method: 'post',
       body: fd,
     }).then((r) => r.json()).then((_resp) => {
-      console.log(fd.get('post_uid'))
-      console.log(fd.get('body'))
       loadReplies(fd.get('post_uid'));
     });
     return false;

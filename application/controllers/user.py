@@ -1,7 +1,7 @@
 import os
 from uuid import uuid4
 
-from flask import Blueprint, jsonify, redirect, render_template, url_for
+from flask import Blueprint, jsonify, redirect, render_template, url_for, request
 from flask_login import current_user, login_required
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
@@ -21,6 +21,7 @@ def profile():
 def post():
     pf = PostForm()
     if pf.validate_on_submit():
+        print("validated")
         image: FileStorage = pf.image.data
         path = os.path.join(
             os.getenv('UPLOAD_PATH', 'storage/'),
@@ -38,16 +39,14 @@ def post():
         ))
         db.session.commit()
         return jsonify({'succ': True})
+    else:
+        print(pf.errors)
     return jsonify({'succ': False})
 
 @bp.post('/comment')
 @login_required
 def comment():
     cf = CommentForm()
-    print(cf.post_uid)
-    print(cf.body)
-    print(cf.validate())
-    print(cf.validate_on_submit())
     if cf.validate_on_submit():
         image: FileStorage = cf.image.data
         path = os.path.join(
@@ -65,6 +64,8 @@ def comment():
         ))
         db.session.commit()
         return jsonify({'succ': True})
+    else:
+        print(cf.errors)
     return jsonify({'succ': False})
 
 app.register_blueprint(bp)

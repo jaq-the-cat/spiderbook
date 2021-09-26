@@ -23,9 +23,9 @@ class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired(), Length(1, 128)])
     body = TextAreaField('Body', validators=[Length(1, 1024)])
     board = SelectField('Board', validators=[DataRequired()], choices=boards)
-    image = FileField('Image', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg', 'bmp'], 'Images only')])
+    image = FileField('Image', validators=[FileAllowed(['jpg', 'png', 'jpeg', 'bmp'], 'Images only')])
 
 class CommentForm(FlaskForm):
     post_uid = HiddenField('post_uid', validators=[DataRequired()])
     body = TextAreaField('Body', validators=[Length(1, 512)])
-    image = FileField('Image', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg', 'bmp'], 'Images only')])
+    image = FileField('Image', validators=[FileAllowed(['jpg', 'png', 'jpeg', 'bmp'], 'Images only')])

@@ -24,7 +24,10 @@ def board_posts(board: str):
 
 @bp.get('/p/<post>')
 def post(post: str):
-    return redirect(url_for('index.index'))
+    return render_template('board.jinja2',
+            title=post,
+            cf=CommentForm(),
+            posts=Post.query.filter_by(uid=post).all())
 
 @bp.get('/p/<post>/comments')
 def post_replies(post: str):
