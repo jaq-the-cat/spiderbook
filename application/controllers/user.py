@@ -57,7 +57,7 @@ def comment():
         if image is not None:
             path = os.path.join(
                 os.getenv('UPLOAD_PATH', 'storage/'),
-                f"{uuid4()}{image.filename.split('.')[-1]}")
+                f"{uuid4()}.{image.filename.split('.')[-1]}")
             mt = image.mimetype
             image.save(path),
         db.session.add(Comment(
