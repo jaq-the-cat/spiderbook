@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, url_for, redirect, jsonify
+from flask import Blueprint, render_template, url_for, redirect, jsonify, send_file
 
+import os
 from application import app
 from application.models import Post
 from application.forms import PostForm, CommentForm
@@ -29,6 +30,15 @@ def post(post: str):
             title=post,
             cf=CommentForm(),
             posts=Post.query.filter_by(uid=post).all())
+
+@bp.get('/p/<post>/image')
+def post_image(post: str):
+    post: Post = Post.query.filter_by(uid=post).first()
+    return send_file(
+        os.path.join('..', post.image_path),
+        download_name=post.image_filename,
+        mimetype=post.image_mimetype
+    )
 
 @bp.get('/p/<post>/comments')
 def post_replies(post: str):
