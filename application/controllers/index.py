@@ -18,6 +18,7 @@ def index():
 def board_posts(board: str):
     return render_template('board.jinja2',
             title=board,
+            board=board,
             pf=PostForm(),
             cf=CommentForm(),
             posts=Post.query.filter_by(board=board))

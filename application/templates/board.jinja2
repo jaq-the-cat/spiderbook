@@ -6,7 +6,9 @@
 
 {% block body %}
   {% if pf is defined %}
-    <form class="post" action="/user/post" method="post" enctype="multipart/form-data">
+  <form class="post"
+        action="/user/post{% if board is defined %}?board={{ board }}{% endif %}"
+  method="post" enctype="multipart/form-data">
       {{ pf.csrf_token }}
       {{ pf.title.label }} {{ pf.title(autocomplete="off") }}
       {{ pf.body.label }} {{ pf.body(autocomplete="off") }}

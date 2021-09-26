@@ -19,9 +19,12 @@ def profile():
 @bp.post('/post')
 @login_required
 def post():
+    board = request.args.get('board')
+    r = url_for('index.board_posts', board=board)\
+        if board is not None\
+        else url_for('index.index')
     pf = PostForm()
     if pf.validate_on_submit():
-        print("validated")
         image: FileStorage = pf.image.data
         path = os.path.join(
             os.getenv('UPLOAD_PATH', 'storage/'),
@@ -38,10 +41,10 @@ def post():
             mt,
         ))
         db.session.commit()
-        return jsonify({'succ': True})
+        return redirect(r)
     else:
         print(pf.errors)
-    return jsonify({'succ': False})
+    return redirect(r)
 
 @bp.post('/comment')
 @login_required
