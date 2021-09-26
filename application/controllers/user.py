@@ -6,7 +6,7 @@ from flask_login import current_user, login_required
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 
-from application import app, db
+from application import app, db, limiter
 from application.forms import CommentForm, PostForm
 from application.models import Comment, Post
 
@@ -17,6 +17,7 @@ def profile():
     return ''
 
 @bp.post('/post')
+@limiter.limit("3 per hour")
 @login_required
 def post():
     board = request.args.get('board')
@@ -47,6 +48,7 @@ def post():
     return redirect(r)
 
 @bp.post('/comment')
+@limiter.limit("16 per hour")
 @login_required
 def comment():
     cf = CommentForm()

@@ -6,6 +6,9 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
 dotenv.load_dotenv()
 
 app = Flask(__name__)
@@ -24,6 +27,12 @@ def before_first_request():
 # Initialize Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+# Initialize Flask-Limiter
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+)
 
 from application.models import User
 @login_manager.user_loader

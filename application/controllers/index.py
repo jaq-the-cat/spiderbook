@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, url_for, redirect, jsonify, send_file
-
 import os
 from application import app
 from application.models import Post
