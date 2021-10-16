@@ -28,7 +28,7 @@ def post(post: str):
     return render_template('board.jinja2',
             title=post,
             cf=CommentForm(),
-            posts=Post.query.filter_by(uid=post)).all()
+            posts=Post.query.filter_by(uid=post).all())
 
 @bp.get('/p/<post>/image')
 def post_image(post: str):
